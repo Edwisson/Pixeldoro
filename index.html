@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&family=PT+Sans:ital,wght@0,400;0,700;1,400;1,700&family=Pixelify+Sans:wght@400..700&family=Tiny5&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+
+    <header class="head">
+        <h1 class="no-margin head__titulo">Pixeldoro</h1>
+    </header>
+
+    <div class="grid contenedor">
+        <aside class="sidebar">
+            <section>
+                <form action="">
+                    <fieldset>
+                        <legend>
+                            <h2 class="no-margin">Tareas</h2>
+                        </legend>
+                        <input type="text" placeholder="Nombre Tarea" class="sidebar__input">
+
+                        <div>
+                            <input type="number" placeholder="Duracion Total" class="sidebar__inputNum">
+                            <input type="number" placeholder="Duracion cada sesión" class="sidebar__inputNum">
+                            <input type="number" placeholder="Duracion descanso" class="sidebar__inputNum">
+                        </div>
+                        <input type="submit" class="sidebar__boton" value="Crear">
+                    </fieldset>
+                </form>
+
+            </section>
+            <div class="tareas">
+                <!-- Aquí se mostrarán las tareas creadas -->
+                <div class="tareas__seccion">
+                    <div class="tareas__tarea">
+                        <h3 class="no-margin tarea__">Tarea 1</h3>
+                    </div>
+                     <button class="tareas__boton">X</button>
+                </div>
+                <div class="tareas__seccion">
+                    <div class="tareas__tarea">
+                        <h3 class="no-margin tarea__">Tarea 2</h3>
+                    </div>
+                     <button class="tareas__boton">X</button>
+                </div>
+                <div class="tareas__seccion">
+                    <div class="tareas__tarea">
+                        <h3 class="no-margin tarea__">Tarea 3</h3>
+                    </div>
+                     <button class="tareas__boton">X</button>
+                </div>
+                <div class="tareas__seccion">
+                    <div class="tareas__tarea">
+                        <h3 class="no-margin tarea__">Tarea 4</h3>
+                    </div>
+                     <button class="tareas__boton">X</button>
+                </div>
+            </div>
+
+        </aside>
+
+        <main class="reloj">
+            <h2 class="no-margin tarea__actual">Tarea Actual</h2>
+
+            <div class="pomodoro">
+                <p class="pomodoro__time">12</p>
+                <p class="pomodoro__time">49</p>
+            </div>
+            <div>
+                <button class="pomodoro__boton">
+                    <img src="img/start1.png" alt="Iniciar">
+                </button>
+                <button class="pomodoro__boton">
+                    <img src="img/stop.png" alt="Detener">
+                </button>
+            </div>
+
+
+        </main>
+    </div>
+</body>
+
+</html>
