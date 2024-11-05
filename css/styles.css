@@ -123,12 +123,20 @@ fieldset {
 }
 
 .sidebar__boton {
-    width: 8rem;
+    width: 10rem;
     height: 4rem;
-    font-size: 2rem;
+    font-size: 3rem;
     border: none;
-    color: var(--oscuro);
+    color: white;
     font-weight: bold;
+    background-color: var(--fondoRojo);
+    border: 2px solid #d03b3b;
+    border-bottom: 4px solid #6a1520;
+    margin: 1rem;
+}
+
+.sidebar__boton:hover{
+    transform: scale(1.05);
 }
 
 /**Tareas**/
@@ -159,13 +167,18 @@ fieldset {
 }
 
 .tareas__boton{
-    height: 5rem;
-    width: 5rem;
-    border: none;
+    height: 4rem;
+    width: 4rem;
     background-color: var(--fondoRojo);
     font-weight: bold;
     color: white;
-    border: .5rem solid var(--oscuro);
+    border: 2px solid #d03b3b;
+    border-bottom: 4px solid #6a1520;
+
+}
+
+.tareas__boton:hover{
+    transform: scale(1.05);
 }
 /**Pomodoro**/
 
@@ -237,9 +250,21 @@ fieldset {
     width: 16rem;
     height: 10rem;
     margin: 0 2rem;
-    border: 0.5rem solid white;
+    border: 0.5rem solid var(--claro);
+    border-bottom: 1rem inset var(--oscuro);
     background-color: var(--fondo2);
     padding: 2rem;
+}
+
+.pomodoro__boton:hover{
+    background-color: var(--fondoRojo);
+    border: 0.5rem solid #d03b3b;
+    border-bottom: 1rem solid #6a1520;
+    transform: scale(1.05);
+}
+
+.pomodoro__boton:click{
+
 }
 
 @media (max-width: 768px) {
