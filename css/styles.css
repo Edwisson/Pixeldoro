@@ -91,7 +91,7 @@ fieldset {
 
 .sidebar {
     background-color: var(--fondo2);
-    padding: 1rem;
+    padding: 2rem;
     border: 1rem solid white;
     max-height: 80vh;
 }
@@ -142,7 +142,7 @@ fieldset {
 /**Tareas**/
 
 .tareas {
-    padding: 2rem;
+    padding: 1rem;
     border: 2px solid white;
     font-size: 2rem;
 }
