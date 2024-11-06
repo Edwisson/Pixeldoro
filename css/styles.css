@@ -40,6 +40,12 @@ fieldset {
     margin-bottom: 2rem;
 }
 
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 .contenedor {
     max-width: 200rem;
     width: 90%;
@@ -112,7 +118,7 @@ fieldset {
 }
 
 .sidebar__inputNum {
-    width: 4rem;
+    width: 6rem;
     height: 4rem;
     margin: 1rem 1rem;
 }
@@ -148,7 +154,7 @@ fieldset {
 .tareas {
     padding: 1rem;
     border: 2px solid white;
-    font-size: 2rem;
+    font-size: 1.5rem;
 }
 
 .tareas__seccion{

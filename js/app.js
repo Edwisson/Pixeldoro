@@ -30,7 +30,7 @@ function registrarTarea(e) {
 
     if (task.nombre === '' || task.sesiones == 0 || task.duracion == 0 || task.descanso == 0) {
         alert("Error: Campos incompletos");
-    } else {
+    } else{
         tasks.push({ ...task });  // Línea cambiada: agregar una copia de `task` a `tasks`
         crearTarea(tasks.length - 1);  // Línea cambiada: pasar el índice de la tarea a crear
         console.log('Tarea registrada correctamente');
