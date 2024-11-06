@@ -112,14 +112,18 @@ fieldset {
 }
 
 .sidebar__inputNum {
-    width: 6rem;
+    width: 4rem;
     height: 4rem;
-    margin: 1rem;
+    margin: 1rem 1rem;
 }
 
 .sidebar__input {
     width: 100%;
     height: 4rem;
+}
+
+.sidebar__label{
+    font-size: 1.5rem;
 }
 
 .sidebar__boton {
@@ -209,13 +213,14 @@ fieldset {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    height: calc(144px*2) ;
-    width: calc(176px*2);
+    height: calc(144px*2.5) ;
+    width: calc(176px*2.5);
     margin: 0 auto;
     padding: 0;
     display: flex;
     justify-content: center;
     align-items: center;
+    border-bottom: 2rem solid #51292e;
 }
 
 @media (max-width: 768px) {

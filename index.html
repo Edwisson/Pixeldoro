@@ -29,13 +29,18 @@
                         <legend>
                             <h2 class="no-margin">Tareas</h2>
                         </legend>
-                        <input type="text" placeholder="Nombre Tarea" class="sidebar__input">
+                        <input type="text" placeholder="Nombre Tarea" class="sidebar__input" id="nombre">
 
                         <div>
-                            <input type="number" placeholder="Duracion Total" class="sidebar__inputNum">
-                            <input type="number" placeholder="Duracion cada sesión" class="sidebar__inputNum">
-                            <input type="number" placeholder="Duracion descanso" class="sidebar__inputNum">
+
+                            <label for="sesiones" class="sidebar__label">Sesiones<input type="number" placeholder="Duracion Total" class="sidebar__inputNum" id="sesiones" min="1"></label>
+                            
+                            <label for="duracion" class="sidebar__label">Duracion <input type="number" placeholder="Duracion cada sesión" class="sidebar__inputNum" id="duracion"  min="1"></label>
+                           
+                            <label for="descanso" class="sidebar__label">Descanso <input type="number" placeholder="Duracion descanso" class="sidebar__inputNum" id="descanso"  min="1"></label>
+                            
                         </div>
+
                         <input type="submit" class="sidebar__boton" value="Crear">
                     </fieldset>
                 </form>
@@ -43,30 +48,7 @@
             </section>
             <div class="tareas">
                 <!-- Aquí se mostrarán las tareas creadas -->
-                <div class="tareas__seccion">
-                    <div class="tareas__tarea">
-                        <h3 class="no-margin tarea__">Tarea 1</h3>
-                    </div>
-                     <button class="tareas__boton">X</button>
-                </div>
-                <div class="tareas__seccion">
-                    <div class="tareas__tarea">
-                        <h3 class="no-margin tarea__">Tarea 2</h3>
-                    </div>
-                     <button class="tareas__boton">X</button>
-                </div>
-                <div class="tareas__seccion">
-                    <div class="tareas__tarea">
-                        <h3 class="no-margin tarea__">Tarea 3</h3>
-                    </div>
-                     <button class="tareas__boton">X</button>
-                </div>
-                <div class="tareas__seccion">
-                    <div class="tareas__tarea">
-                        <h3 class="no-margin tarea__">Tarea 4</h3>
-                    </div>
-                     <button class="tareas__boton">X</button>
-                </div>
+            
             </div>
 
         </aside>
@@ -90,6 +72,7 @@
 
         </main>
     </div>
+    <script src="js/app.js"></script>
 </body>
 
 </html>
