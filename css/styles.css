@@ -128,6 +128,10 @@ input[type="number"]::-webkit-inner-spin-button {
     height: 4rem;
 }
 
+.sidebar__inputNum:hover{
+    border-color: var(--claro);
+}
+
 .sidebar__label{
     font-size: 1.5rem;
 }
@@ -174,6 +178,11 @@ input[type="number"]::-webkit-inner-spin-button {
     padding: 2rem 1rem;
     display: flex;
     align-items: center;
+}
+
+.tareas__tarea--activa{
+    background-color: var(--fondoRojo) ;
+    border-color: white;
 }
 
 .tareas__boton{

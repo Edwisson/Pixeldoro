@@ -30,7 +30,7 @@ function registrarTarea(e) {
 
     if (task.nombre === '' || task.sesiones == 0 || task.duracion == 0 || task.descanso == 0) {
         alert("Error: Campos incompletos");
-    } else{
+    } else {
         tasks.push({ ...task });  // Línea cambiada: agregar una copia de `task` a `tasks`
         crearTarea(tasks.length - 1);  // Línea cambiada: pasar el índice de la tarea a crear
         console.log('Tarea registrada correctamente');
@@ -47,7 +47,7 @@ function registrarTarea(e) {
     }
 }
 
-function crearTarea(index) {  // Línea cambiada: agregar `index` como parámetro
+function crearTarea(index) {
     if (tasks.length <= 4) {
         const tareasContainer = document.querySelector('.tareas');
 
@@ -73,7 +73,12 @@ function crearTarea(index) {  // Línea cambiada: agregar `index` como parámetr
         botonEliminar.addEventListener('click', () => {
             tareasSeccion.remove();
             tasks.splice(index, 1);  // Línea cambiada: eliminar la tarea del array `tasks`
-            console.log(`Tarea eliminada: ${tasks[index].nombre}`);
+            console.log(`Tarea eliminada: ${tasks[index] ? tasks[index].nombre : 'desconocida'}`);
+            let tareaActual = document.querySelector('.tarea__actual')
+            tareaActual.textContent = "Selecciona una tarea"
+            let pomodoroTime=document.querySelectorAll('.pomodoro__time')
+            pomodoroTime[0].textContent= '00'
+            pomodoroTime[1].textContent= '00'
         });
 
         // Agregar el título de la tarea al contenedor de la tarea
@@ -88,4 +93,30 @@ function crearTarea(index) {  // Línea cambiada: agregar `index` como parámetr
     } else {
         alert('Termina todas las tareas actuales - No te sobrecargues');
     }
+}
+
+// Seleccionar el contenedor de las tareas
+const contenedor = document.querySelector('.tareas');
+
+
+contenedor.addEventListener('click', function(e) {
+
+    const tareaSeccion = e.target.closest('.tareas__seccion'); 
+
+    if (tareaSeccion) {
+       
+        const index = Array.from(contenedor.children).indexOf(tareaSeccion);
+        seleccionarTarea(index)
+    }
+});
+
+function seleccionarTarea(index){
+    let tareas= document.querySelectorAll('.tareas__tarea')
+    tareas.forEach(tarea => tarea.classList.remove('tareas__tarea--activa'));
+    tareas[index].classList.add('tareas__tarea--activa')
+    let tareaTitulo = document.querySelector('.tarea__actual')
+    tareaTitulo.textContent = tasks[index].nombre
+    let pomodoroTime=document.querySelectorAll('.pomodoro__time')
+    pomodoroTime[0].textContent=tasks[index].duracion
+    pomodoroTime[1].textContent= '00'
 }
