@@ -9,6 +9,8 @@ const task = {
 
 let tasks = [];
 
+let tareaActiva;
+
 const nombreTarea = document.querySelector('#nombre');
 const sesiones = document.querySelector('#sesiones');
 const duracion = document.querySelector('#duracion');
@@ -34,7 +36,7 @@ function registrarTarea(e) {
         tasks.push({ ...task });  // Línea cambiada: agregar una copia de `task` a `tasks`
         crearTarea(tasks.length - 1);  // Línea cambiada: pasar el índice de la tarea a crear
         console.log('Tarea registrada correctamente');
-        
+
         // Restablecer los valores de `task` y el formulario
         task.nombre = '';
         task.sesiones = 0;
@@ -76,9 +78,9 @@ function crearTarea(index) {
             console.log(`Tarea eliminada: ${tasks[index] ? tasks[index].nombre : 'desconocida'}`);
             let tareaActual = document.querySelector('.tarea__actual')
             tareaActual.textContent = "Selecciona una tarea"
-            let pomodoroTime=document.querySelectorAll('.pomodoro__time')
-            pomodoroTime[0].textContent= '00'
-            pomodoroTime[1].textContent= '00'
+            let pomodoroTime = document.querySelectorAll('.pomodoro__time')
+            pomodoroTime[0].textContent = '00'
+            pomodoroTime[1].textContent = '00'
         });
 
         // Agregar el título de la tarea al contenedor de la tarea
@@ -99,24 +101,63 @@ function crearTarea(index) {
 const contenedor = document.querySelector('.tareas');
 
 
-contenedor.addEventListener('click', function(e) {
+contenedor.addEventListener('click', function (e) {
 
-    const tareaSeccion = e.target.closest('.tareas__seccion'); 
+    const tareaSeccion = e.target.closest('.tareas__seccion');
 
     if (tareaSeccion) {
-       
+
         const index = Array.from(contenedor.children).indexOf(tareaSeccion);
         seleccionarTarea(index)
     }
 });
 
-function seleccionarTarea(index){
-    let tareas= document.querySelectorAll('.tareas__tarea')
+let pomodoroTime = document.querySelectorAll('.pomodoro__time')
+
+function seleccionarTarea(index) {
+    let tareas = document.querySelectorAll('.tareas__tarea')
     tareas.forEach(tarea => tarea.classList.remove('tareas__tarea--activa'));
     tareas[index].classList.add('tareas__tarea--activa')
     let tareaTitulo = document.querySelector('.tarea__actual')
     tareaTitulo.textContent = tasks[index].nombre
-    let pomodoroTime=document.querySelectorAll('.pomodoro__time')
-    pomodoroTime[0].textContent=tasks[index].duracion
-    pomodoroTime[1].textContent= '00'
+
+    pomodoroTime[0].textContent = tasks[index].duracion
+    pomodoroTime[1].textContent = '00'
+    tareaActiva = tasks[index]
+    tareaActiva.index = index
 }
+
+async function contador() {
+    while (tareaActiva.sesiones != 0) {
+        let min = tareaActiva.duracion; // Declarar `min` fuera del intervalo para persistir su valor
+        let seg = 0; // Iniciar segundos en 0
+        const intervalo = setInterval(() => {
+            console.log("Ejecutando acción en el intervalo");
+
+            if (seg === 0) {
+                min -= 1; // Reducir los minutos
+                seg = 59; // Reiniciar los segundos a 59
+            } else {
+                seg -= 1; // Reducir los segundos
+            }
+
+            // Actualizar el DOM con los valores actuales de `min` y `seg`
+            pomodoroTime[0].textContent = min < 10 ? `0${min}` : min
+            pomodoroTime[1].textContent = seg < 10 ? `0${seg}` : seg
+
+        }, 1000);
+
+        await new Promise(resolve => setTimeout(resolve, tareaActiva.duracion * 60 * 1000));
+        clearInterval(intervalo);
+        tareaActiva.sesiones -= 1// Detener el intervalo si llega a 0 minutos y 0 segundos
+    }
+    if (tareaActiva.sesiones == 0) {
+        const tareaSecciones = contenedor.querySelectorAll('.tareas__seccion')
+        tareaSecciones[tareaActiva.index].remove()
+        tasks.splice(tareaActiva.index, 1);
+    }
+}
+
+// Corrección en el selector del botón
+let botonIniciar = document.querySelector('#iniciar');
+botonIniciar.addEventListener('click', contador);
