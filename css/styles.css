@@ -204,7 +204,7 @@ input[type="number"]::-webkit-inner-spin-button {
 
 
 .tarea__actual {
-    font-size: 7rem;
+    font-size: 6rem;
     background-color: var(--fondo2);
     color: white;
     width: 100%;
@@ -219,7 +219,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 @media (max-width: 768px) {
     .tarea__actual{
-        font-size: 5rem;
+        font-size: 4rem;
     }
 }
 
