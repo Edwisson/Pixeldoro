@@ -109,20 +109,24 @@ function seleccionarTarea(index) {
 }
 
 let intervalo;
+let pausa;
 
 async function contador() {
     if (contadorActivo === true) {
-        return;
+        return; // Evitar que se ejecute si el contador ya está activo
     }
     contadorActivo = true;
 
     while (tareaActiva.sesiones > 0 && contadorActivo) {
         let min = tareaActiva.duracion;
         let seg = 0;
-        sesion.textContent = tareaActiva.sesionActual;
 
+        // Actualiza la sesión en pantalla
+        sesion.textContent = `${tareaActiva.sesionActual}`;
+
+        // Temporizador de trabajo
         intervalo = setInterval(() => {
-            if (!contadorActivo) {
+            if (!contadorActivo) { // Si se pausa
                 clearInterval(intervalo);
                 return;
             }
@@ -140,19 +144,55 @@ async function contador() {
 
             pomodoroTime[0].textContent = min < 10 ? `0${min}` : min;
             pomodoroTime[1].textContent = seg < 10 ? `0${seg}` : seg;
+
         }, 1000);
 
+        // Espera hasta que se complete el tiempo de trabajo o se pause
         await new Promise(resolve => setTimeout(resolve, tareaActiva.duracion * 60 * 1000));
         clearInterval(intervalo);
+        
+        // Verifica si quedan más sesiones para aplicar descanso
         tareaActiva.sesiones -= 1;
         tareaActiva.sesionActual += 1;
+
+        if (tareaActiva.sesiones > 1 && contadorActivo) { // Descanso si hay sesiones restantes
+            min = tareaActiva.descanso;
+            seg = 0;
+            sesion.textContent = `Descanso (${tareaActiva.descanso} min)`;
+
+            intervalo = setInterval(() => {
+                if (!contadorActivo) { // Pausa el descanso
+                    clearInterval(intervalo);
+                    return;
+                }
+
+                if (seg === 0) {
+                    if (min === 0) {
+                        clearInterval(intervalo);
+                        return;
+                    }
+                    min -= 1;
+                    seg = 59;
+                } else {
+                    seg -= 1;
+                }
+
+                pomodoroTime[0].textContent = min < 10 ? `0${min}` : min;
+                pomodoroTime[1].textContent = seg < 10 ? `0${seg}` : seg;
+
+            }, 1000);
+
+            await new Promise(resolve => setTimeout(resolve, tareaActiva.descanso * 60 * 1000));
+            clearInterval(intervalo);
+        }
     }
 
+    // Al terminar todas las sesiones, se elimina la tarea
     if (tareaActiva.sesiones === 0) {
         const tareaSecciones = contenedor.querySelectorAll('.tareas__seccion');
-        sesion.textContent = 0
         tareaSecciones[tareaActiva.index].remove();
         tasks.splice(tareaActiva.index, 1);
+        sesion.textContent = "Sesión completa";
     }
 
     contadorActivo = false;
