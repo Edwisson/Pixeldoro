@@ -249,13 +249,18 @@ input[type="number"]::-webkit-inner-spin-button {
     display: flex;
     justify-content: center;
     align-items: center;
-    margin: 4rem 3rem 0;
+    margin: 4rem 1.5rem 0 3.5rem;
     height: 6rem;
     width: 8rem;
     background-color: var(--fondoRojo);
     font-size: 6rem;
     color: #fff;
     overflow: hidden;
+}
+
+.pomodoro__sesion{
+    color: #fff;
+    font-size: 16px;
 }
 
 @media (max-width: 768px) {
