@@ -94,6 +94,7 @@ function crearTarea(index) {
         botonEliminar.addEventListener('click', () => {
             tareasSeccion.remove();
             tasks.splice(index, 1);
+            tareaActiva = task
             tareaTitulo.textContent = "Selecciona una tarea";
             pomodoroTime[1].textContent = '00'
             pomodoroTime[0].textContent = '00'
@@ -151,7 +152,7 @@ async function contador() {
         if (contadorActivo) {
 
             tareaActiva.sesionActual += 1; // Incrementa el número de sesión
-            sesion.textContent = `0${tareaActiva.sesionActual}`; // Muestra el número de sesión
+            sesion.textContent = `0${tareaActiva.sesionActual-1}`; // Muestra el número de sesión
         }
     }
 
