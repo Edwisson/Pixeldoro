@@ -30,6 +30,8 @@ const botonDetener = document.querySelector('#detener'); //    Botones
 const audioDetener = document.querySelector('#audioDetener')
 const audioStart = document.querySelector('#audioStart')
 const audioStop = document.querySelector('#audioStop')
+
+const body = document.querySelector('body')
 // Eventos
 
 
@@ -147,6 +149,7 @@ async function contador() {
         if (tareaActiva.sesionActual % 2 !== 0) { // Sesión de trabajo
             // Ejecuta la sesión de trabajo
             await ejecutarSesion(tareaActiva.duracion, 'trabajo');
+            await crearVentana('Terminaste una sesion, tomate un descanso')
 
             if (contadorActivo) tareaActiva.sesiones -= 1;
             // Disminuye las sesiones restantes
@@ -247,4 +250,30 @@ async function establecerTexto(nombre) {
 // Función para hacer una pausa entre cada sesión
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}1
+
+//ventana
+
+async function crearVentana(texto){
+    const ventana = document.createElement('div');
+    ventana.classList.add('ventana');
+    
+    const ventanaTexto = document.createElement('h2');
+    ventanaTexto.classList.add('ventana__texto');
+    
+    const contenedorVentana = document.createElement('div');
+    contenedorVentana.classList.add('contenedorVentana');
+    
+    ventana.appendChild(ventanaTexto);
+    contenedorVentana.appendChild(ventana);
+
+    document.body.insertBefore(contenedorVentana, document.body.firstChild);
+    ventanaTexto.textContent = texto;
+
+    for(i=0; i<3; i++){
+        ventanaTexto.textContent +='.'
+        await sleep(1000)
+    }
+
+    contenedorVentana.remove()
 }
