@@ -54,19 +54,22 @@
         </aside>
 
         <main class="reloj">
-            <h2 class="no-margin tarea__actual">Hola</h2>
+            <h2 class="no-margin tarea__actual">selecciona una tarea</h2>
 
             <div class="pomodoro">
                 <p class="pomodoro__time">00</p>
                 <p class="pomodoro__time">00</p>
                 <p class="pomodoro__sesion">00</p>
+                <audio src="audio/detener.wav" id="audioDetener"></audio>
             </div>
             <div>
                 <button class="pomodoro__boton" id="iniciar">
                     <img src="img/start1.png" alt="Iniciar">
+                    <audio src="audio/start.mp3" id="audioStart"></audio>
                 </button>
                 <button class="pomodoro__boton" id="detener">
                     <img src="img/stop.png" alt="Detener">
+                    <audio src="audio/stop.mp3" id="audioStop"></audio>
                 </button>
             </div>
 

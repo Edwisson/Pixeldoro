@@ -27,8 +27,9 @@ const sesion = document.querySelector('.pomodoro__sesion'); // sesion pomodoro
 
 const botonIniciar = document.querySelector('#iniciar');  //
 const botonDetener = document.querySelector('#detener'); //    Botones
-
-
+const audioDetener = document.querySelector('#audioDetener')
+const audioStart = document.querySelector('#audioStart')
+const audioStop = document.querySelector('#audioStop')
 // Eventos
 
 
@@ -77,6 +78,7 @@ function registrarTarea(e) {
 }
 function crearTarea(index) {
     if (tasks.length <= 4) {
+        audioStart.play()
         tasks.push({ ...task });
         const tareasSeccion = document.createElement('div');
         tareasSeccion.classList.add('tareas__seccion');
@@ -92,14 +94,16 @@ function crearTarea(index) {
         botonEliminar.textContent = 'X';
 
         botonEliminar.addEventListener('click', () => {
+            audioStop.play()
             tareasSeccion.remove();
             tasks.splice(index, 1);
             tareaActiva = task
-            tareaTitulo.textContent = "Selecciona una tarea";
+            establecerTexto('Selecciona una Tarea')
             pomodoroTime[1].textContent = '00'
             pomodoroTime[0].textContent = '00'
             sesion.textContent = '00'
             detener();
+            botonDetener.classList.remove('pomodoro__boton--click')
         });
 
         tareaDiv.appendChild(nombreTarea);
@@ -121,17 +125,20 @@ function seleccionarTarea(index) {
     let tareas = document.querySelectorAll('.tareas__tarea');
     tareas.forEach(tarea => tarea.classList.remove('tareas__tarea--activa'));
     tareas[index].classList.add('tareas__tarea--activa');
-    tareaTitulo.textContent = tasks[index].nombre;
     pomodoroTime[0].textContent = tasks[index].duracion < 10 ? `0${tasks[index].duracion}` : tasks[index].duracion;
     pomodoroTime[1].textContent = '00';
     sesion.textContent = '00';  // Muestra la primera sesión
     tareaActiva = { ...tasks[index], sesionActual: 1, index: index };
+    establecerTexto(tareaActiva.nombre)
 
 }
 
 async function contador() {
     console.log(tareaActiva.sesiones)
     if (contadorActivo) return; // Si el contador ya está activo, no hacer nada
+    botonIniciar.classList.add('pomodoro__boton--click')
+    botonDetener.classList.remove('pomodoro__boton--click')
+    audioStart.play()
     contadorActivo = true; // Marca el contador como activo
 
     // Mientras haya sesiones disponibles y el contador esté activo
@@ -181,6 +188,10 @@ async function ejecutarSesion(duracion, tipoSesion) {
     // Lógica para contar los minutos y segundos
     while ((min > 0 || seg > 0) && contadorActivo) {
         // Actualiza la UI con el tiempo restante
+        if(min=== 0 && seg === 7){
+            console.log("sonido")
+            audioDetener.play();   
+        }
         pomodoroTime[0].textContent = min < 10 ? `0${min}` : min;
         pomodoroTime[1].textContent = seg < 10 ? `0${seg}` : seg;
 
@@ -209,9 +220,27 @@ async function ejecutarSesion(duracion, tipoSesion) {
 // Función para pausar el temporizador
 function detener() {
     if (contadorActivo) {
+        audioStop.play()
+        botonIniciar.classList.remove('pomodoro__boton--click')
+        botonDetener.classList.add('pomodoro__boton--click')
         pomodoroTime[0].textContent = tareaActiva.duracion < 10 ? `0${tareaActiva.duracion}` : tareaActiva.duracion;
         pomodoroTime[1].textContent = '00';
         contadorActivo = false; // Detener el temporizador
+    }
+}
+let requestID = 0;  // Identificador único para cada llamada
+
+async function establecerTexto(nombre) {
+    requestID++;  
+    const currentID = requestID; 
+    tareaTitulo.textContent = ''; 
+
+    for (let i = 0; i < nombre.length; i++) {
+     
+        if (currentID !== requestID) return;
+
+        tareaTitulo.textContent += nombre[i];
+        await sleep(100);
     }
 }
 
