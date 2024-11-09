@@ -54,12 +54,13 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 @media (min-width: 768px) {
-    .contenedor{
+    .contenedor {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
     }
+
     .grid {
         display: grid;
         grid-template-columns: 2fr 3fr;
@@ -68,7 +69,7 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 @media (max-width: 480px) {
-    .contenedor{
+    .contenedor {
         margin: 5rem auto;
         height: 100%;
     }
@@ -102,8 +103,8 @@ input[type="number"]::-webkit-inner-spin-button {
     max-height: 80vh;
 }
 
-@media (max-width: 480px ) {
-    .sidebar{
+@media (max-width: 480px) {
+    .sidebar {
         margin-bottom: 4rem;
     }
 }
@@ -128,11 +129,11 @@ input[type="number"]::-webkit-inner-spin-button {
     height: 4rem;
 }
 
-.sidebar__inputNum:hover{
+.sidebar__inputNum:hover {
     border-color: var(--claro);
 }
 
-.sidebar__label{
+.sidebar__label {
     font-size: 1.5rem;
 }
 
@@ -149,7 +150,7 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 1rem;
 }
 
-.sidebar__boton:hover{
+.sidebar__boton:hover {
     transform: scale(1.05);
 }
 
@@ -161,14 +162,14 @@ input[type="number"]::-webkit-inner-spin-button {
     font-size: 1.5rem;
 }
 
-.tareas__seccion{
+.tareas__seccion {
     display: flex;
     align-items: center;
     gap: 1rem;
     margin: 2rem 0;
 }
 
-.tareas__tarea{
+.tareas__tarea {
     background-color: var(--claro);
     height: 4rem;
     border: .5rem solid var(--oscuro);
@@ -180,12 +181,12 @@ input[type="number"]::-webkit-inner-spin-button {
     align-items: center;
 }
 
-.tareas__tarea--activa{
-    background-color: var(--fondoRojo) ;
+.tareas__tarea--activa {
+    background-color: var(--fondoRojo);
     border-color: white;
 }
 
-.tareas__boton{
+.tareas__boton {
     height: 4rem;
     width: 4rem;
     background-color: var(--fondoRojo);
@@ -196,9 +197,10 @@ input[type="number"]::-webkit-inner-spin-button {
 
 }
 
-.tareas__boton:hover{
+.tareas__boton:hover {
     transform: scale(1.05);
 }
+
 /**Pomodoro**/
 
 
@@ -213,12 +215,13 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 @media (max-width: 480px) {
-    .tarea__actual{
+    .tarea__actual {
         margin-top: 5rem;
     }
 }
+
 @media (max-width: 768px) {
-    .tarea__actual{
+    .tarea__actual {
         font-size: 4rem;
     }
 }
@@ -228,7 +231,7 @@ input[type="number"]::-webkit-inner-spin-button {
     background-size: contain;
     background-position: center;
     background-repeat: no-repeat;
-    height: calc(144px*2.5) ;
+    height: calc(144px*2.5);
     width: calc(176px*2.5);
     margin: 0 auto;
     padding: 0;
@@ -258,7 +261,7 @@ input[type="number"]::-webkit-inner-spin-button {
     overflow: hidden;
 }
 
-.pomodoro__sesion{
+.pomodoro__sesion {
     color: #fff;
     font-size: 16px;
 }
@@ -281,20 +284,17 @@ input[type="number"]::-webkit-inner-spin-button {
     padding: 2rem;
 }
 
-.pomodoro__boton:hover{
-    background-color: var(--fondoRojo);
-    border: 0.5rem solid #d03b3b;
-    border-bottom: 1rem solid #6a1520;
+.pomodoro__boton:hover {
     transform: scale(1.05);
 }
 
-.pomodoro__boton:click{
-
+.pomodoro__boton--click {
+    background-color: var(--fondoRojo);
+    border: .5rem solid #d03b3b;
 }
 
 @media (max-width: 768px) {
     .pomodoro__boton {
-       
         width: 12rem;
         height: 10rem;
     }
@@ -305,7 +305,7 @@ input[type="number"]::-webkit-inner-spin-button {
     width: 40%;
 }
 
-.reloj{
+.reloj {
     display: flex;
     flex-direction: column;
     justify-content: center;
