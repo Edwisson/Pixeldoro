@@ -277,7 +277,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .pomodoro__boton {
     width: 16rem;
     height: 10rem;
-    margin: 0 2rem 4rem;
+    margin: 0 2rem;
     border: 0.5rem solid var(--claro);
     border-bottom: 1rem inset var(--oscuro);
     background-color: var(--fondo2);
@@ -297,6 +297,7 @@ input[type="number"]::-webkit-inner-spin-button {
     .pomodoro__boton {
         width: 12rem;
         height: 10rem;
+        margin-bottom: 6rem;
     }
 }
 
