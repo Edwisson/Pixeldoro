@@ -30,14 +30,17 @@
                         </legend>
                         <input type="text" placeholder="Nombre Tarea" class="sidebar__input" id="nombre">
 
-                        <div>
-
-                            <label for="sesiones" class="sidebar__label">Sesiones<input type="number"  class="sidebar__inputNum" id="sesiones" min="1" max="6"></label>
-                            
-                            <label for="duracion" class="sidebar__label">Duracion <input type="number"  class="sidebar__inputNum" id="duracion"  max="50"></label>
-                           
-                            <label for="descanso" class="sidebar__label">Descanso <input type="number" class="sidebar__inputNum" id="descanso"  max="15"></label>
-                            
+                        <div class="nums">
+                            <div class="nums__labels">
+                                <label for="sesiones" class="sidebar__label">Sesiones</label>
+                                <label for="duracion" class="sidebar__label">Duracion</label>
+                                <label for="descanso" class="sidebar__label">Descanso</label>
+                            </div>
+                            <div class="nums__inputs">
+                                <input type="number" class="sidebar__inputNum" id="sesiones" min="1" max="6">
+                                <input type="number" class="sidebar__inputNum" id="duracion" max="50">
+                                <input type="number" class="sidebar__inputNum" id="descanso" max="15">
+                            </div>
                         </div>
 
                         <input type="submit" class="sidebar__boton" value="Crear">
@@ -47,7 +50,7 @@
             </section>
             <div class="tareas">
                 <!-- Aquí se mostrarán las tareas creadas -->
-            
+
             </div>
 
         </aside>

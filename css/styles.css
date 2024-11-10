@@ -118,6 +118,22 @@ input[type="number"]::-webkit-inner-spin-button {
     color: white;
 }
 
+@media (max-width: 768px) {
+    .nums{
+        display: flex;
+        justify-content: center;
+    }
+    .nums__inputs{
+        display: flex;
+        flex-direction: column;
+    }
+    .nums__labels{
+        display: grid;
+    }
+    .nums__labels label{
+        margin: auto;
+    }
+}
 .sidebar__inputNum {
     width: 6rem;
     height: 4rem;
@@ -127,6 +143,7 @@ input[type="number"]::-webkit-inner-spin-button {
 .sidebar__input {
     width: 100%;
     height: 4rem;
+    margin-bottom: 1rem;
 }
 
 .sidebar__inputNum:hover {
