@@ -19,7 +19,7 @@ const duracion = document.querySelector('#duracion');   //
 const descanso = document.querySelector('#descanso');  //
 
 const tareasContenedor = document.querySelector('.tareas');//contenedor de las tareas 
-const tareaSecciones = tareasContenedor.querySelectorAll('.tareas__seccion');
+let tareaSecciones = tareasContenedor.querySelectorAll('.tareas__seccion');
 
 const tareaTitulo = document.querySelector('.tarea__actual'); //Titulo que identifica la tarea actual
 const pomodoroTime = document.querySelectorAll('.pomodoro__time'); //reloj pomodoro
@@ -149,7 +149,7 @@ async function contador() {
         if (tareaActiva.sesionActual % 2 !== 0) { // Sesión de trabajo
             // Ejecuta la sesión de trabajo
             await ejecutarSesion(tareaActiva.duracion, 'trabajo');
-            await crearVentana('Terminaste una sesion, tomate un descanso')
+            if (contadorActivo && tareaActiva.sesiones != 1) await crearVentana('Terminaste una sesion, tomate un descanso')
 
             if (contadorActivo) tareaActiva.sesiones -= 1;
             // Disminuye las sesiones restantes
@@ -162,7 +162,7 @@ async function contador() {
         if (contadorActivo) {
 
             tareaActiva.sesionActual += 1; // Incrementa el número de sesión
-            sesion.textContent = `0${tareaActiva.sesionActual-1}`; // Muestra el número de sesión
+            sesion.textContent = `0${tareaActiva.sesionActual - 1}`; // Muestra el número de sesión
         }
     }
 
@@ -171,9 +171,17 @@ async function contador() {
         pomodoroTime[1].textContent = '00'
         pomodoroTime[0].textContent = '00'
         sesion.textContent = '00'
+        await crearVentana('tarea completada')    
+        tasks.splice(tareaActiva.index, 1);
+        botonDetener.classList.remove('pomodoro__boton--click')
+        botonIniciar.classList.remove('pomodoro__boton--click')
+        tareaSecciones=document.querySelectorAll('.tareas__seccion')
+        tareaSecciones[tareaActiva.index].remove()
+        console.log(tareaSecciones)
+        tareaActiva = null
     }
+
     contadorActivo = false;
-    tareaActiva.sesionActual = 1; // Reinicia el contador de sesiones al finalizar
 }
 
 // Función para ejecutar una sesión de trabajo o descanso
@@ -191,9 +199,9 @@ async function ejecutarSesion(duracion, tipoSesion) {
     // Lógica para contar los minutos y segundos
     while ((min > 0 || seg > 0) && contadorActivo) {
         // Actualiza la UI con el tiempo restante
-        if(min=== 0 && seg === 7){
+        if (min === 0 && seg === 7) {
             console.log("sonido")
-            audioDetener.play();   
+            audioDetener.play();
         }
         pomodoroTime[0].textContent = min < 10 ? `0${min}` : min;
         pomodoroTime[1].textContent = seg < 10 ? `0${seg}` : seg;
@@ -234,12 +242,12 @@ function detener() {
 let requestID = 0;  // Identificador único para cada llamada
 
 async function establecerTexto(nombre) {
-    requestID++;  
-    const currentID = requestID; 
-    tareaTitulo.textContent = ''; 
+    requestID++;
+    const currentID = requestID;
+    tareaTitulo.textContent = '';
 
     for (let i = 0; i < nombre.length; i++) {
-     
+
         if (currentID !== requestID) return;
 
         tareaTitulo.textContent += nombre[i];
@@ -250,28 +258,28 @@ async function establecerTexto(nombre) {
 // Función para hacer una pausa entre cada sesión
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
-}1
+} 1
 
 //ventana
 
-async function crearVentana(texto){
+async function crearVentana(texto) {
     const ventana = document.createElement('div');
     ventana.classList.add('ventana');
-    
+
     const ventanaTexto = document.createElement('h2');
     ventanaTexto.classList.add('ventana__texto');
-    
+
     const contenedorVentana = document.createElement('div');
     contenedorVentana.classList.add('contenedorVentana');
-    
+
     ventana.appendChild(ventanaTexto);
     contenedorVentana.appendChild(ventana);
 
     document.body.insertBefore(contenedorVentana, document.body.firstChild);
     ventanaTexto.textContent = texto;
 
-    for(i=0; i<3; i++){
-        ventanaTexto.textContent +='.'
+    for (i = 0; i < 3; i++) {
+        ventanaTexto.textContent += '.'
         await sleep(1000)
     }
 
