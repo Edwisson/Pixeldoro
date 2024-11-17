@@ -102,6 +102,12 @@ input[type="number"]::-webkit-inner-spin-button {
     border: 1rem solid white;
     max-height: 80vh;
 }
+@media (max-width: 768px) {
+    .sidebar {
+        margin-bottom: 5.5rem;
+        max-height: none;
+    }
+}
 
 @media (max-width: 480px) {
     .sidebar {
