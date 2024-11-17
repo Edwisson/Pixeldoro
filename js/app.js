@@ -159,7 +159,7 @@ async function contador() {
         } else { // Sesión de descanso
             // Ejecuta la sesión de descanso
             await ejecutarSesion(tareaActiva.descanso, 'descanso');
-            if (contadorActivo && tareaActiva.sesiones != 1) await crearVentana('Terminaste un descanso, comenzará una nueva sesion');
+            await crearVentana('Terminaste un descanso, comenzará una nueva sesion');
 
         }
 
@@ -175,6 +175,7 @@ async function contador() {
         pomodoroTime[1].textContent = '00';
         pomodoroTime[0].textContent = '00';
         sesion.textContent = '00';
+        establecerTexto("Selecciona una tarea")
         await crearVentana('tarea completada');
         tasks.splice(tareaActiva.index, 1);
         botonDetener.classList.remove('pomodoro__boton--click');
@@ -269,6 +270,7 @@ function sleep(ms) {
 //ventana
 
 async function crearVentana(texto) {
+    pomodoroTime[1].textContent = "00"
     const ventana = document.createElement('div');
     ventana.classList.add('ventana');
 
